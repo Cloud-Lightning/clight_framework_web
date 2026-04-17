@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>clight_framework_web</title>
+  <title>clight framework</title>
   <style>
     :root {
       --bg-1: #eef8ff;
       --bg-2: #bfe4ff;
       --bg-3: #86caff;
       --panel: rgba(255,255,255,0.90);
-      --panel-2: rgba(255,255,255,0.98);
       --ink: #111111;
-      --blue: #108cff;
-      --blue-deep: #005ecc;
       --line: rgba(0,0,0,0.08);
       --shadow-soft: 0 16px 30px rgba(0, 89, 173, 0.16);
       --shadow-hard: 0 12px 0 #0f0f0f, 0 24px 40px rgba(0,0,0,0.16);
@@ -98,8 +95,6 @@
     }
 
     .nav,
-    .panel,
-    .block,
     .hero-box,
     .arch-box,
     .feature-box,
@@ -202,36 +197,43 @@
       gap: 14px;
     }
 
-    .left {
-      grid-template-rows: 1.12fr 0.88fr;
-    }
+    .left { grid-template-rows: 1.12fr 0.88fr; }
+    .right { grid-template-rows: 0.92fr 1.08fr; }
 
-    .right {
-      grid-template-rows: 0.92fr 1.08fr;
-    }
-
-    .hero-box {
+    .hero-box,
+    .feature-box,
+    .arch-box,
+    .cta-box {
       border-radius: var(--radius-xl);
-      padding: 22px 24px;
-      position: relative;
-      overflow: hidden;
+      padding: 18px 20px;
+    }
+
+    .hero-box,
+    .feature-card,
+    .arch-step,
+    .mini-card {
       transform-style: preserve-3d;
       transition: transform .18s ease, box-shadow .18s ease;
     }
 
-    .hero-box:hover {
-      transform: perspective(1400px) rotateX(3deg) rotateY(-4deg) translateY(-3px);
-      box-shadow: 0 24px 40px rgba(0, 89, 173, 0.22);
+    .tilt:hover {
+      transform: perspective(1200px) rotateX(5deg) rotateY(-6deg) translateY(-2px);
+      box-shadow: 0 14px 0 #101010, 0 24px 26px rgba(0,0,0,0.12);
+    }
+
+    .hero-box {
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-box::after {
-      content: "SINGLE SCREEN / EMBEDDED FRAMEWORK";
+      content: "CLIGHT FRAMEWORK / EMBEDDED BSP ABSTRACTION";
       position: absolute;
       top: 18px;
       right: 18px;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       color: rgba(0,0,0,0.22);
     }
 
@@ -245,7 +247,7 @@
       border: 1px solid var(--line);
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
@@ -259,11 +261,11 @@
 
     .hero-title {
       margin: 16px 0 10px;
-      font-size: clamp(34px, 4vw, 62px);
-      line-height: .95;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: .97;
       letter-spacing: -0.07em;
       font-weight: 900;
-      max-width: 10ch;
+      max-width: 12ch;
     }
 
     .hero-text {
@@ -293,10 +295,6 @@
       transition: transform .18s ease, box-shadow .18s ease;
     }
 
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
     .button.primary {
       background: linear-gradient(180deg, #3aafff, #0074ec);
       color: #fff;
@@ -308,14 +306,6 @@
       background: #fff;
       border: 1px solid var(--line);
       box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    }
-
-    .feature-box,
-    .arch-box,
-    .cta-box {
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      min-height: 0;
     }
 
     .section-title {
@@ -341,13 +331,6 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       box-shadow: 0 10px 0 #101010, 0 18px 24px rgba(0,0,0,0.10);
-      transition: transform .18s ease, box-shadow .18s ease;
-      transform-style: preserve-3d;
-    }
-
-    .tilt:hover {
-      transform: perspective(1200px) rotateX(5deg) rotateY(-6deg) translateY(-2px);
-      box-shadow: 0 14px 0 #101010, 0 24px 26px rgba(0,0,0,0.12);
     }
 
     .feature-card {
@@ -376,9 +359,11 @@
       letter-spacing: -0.05em;
     }
 
-    .feature-card p {
+    .feature-card p,
+    .arch-step p,
+    .mini-card p {
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.7;
       color: rgba(17,17,17,0.68);
     }
@@ -420,13 +405,6 @@
       margin-bottom: 6px;
     }
 
-    .arch-step p {
-      margin: 0;
-      font-size: 12px;
-      line-height: 1.7;
-      color: rgba(17,17,17,0.68);
-    }
-
     .arch-arrow {
       position: absolute;
       right: -15px;
@@ -447,13 +425,9 @@
       background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(234,247,255,0.94));
     }
 
-    .cta-main {
-      padding-right: 6px;
-    }
-
     .cta-main h2 {
       margin: 0 0 10px;
-      font-size: clamp(24px, 2.6vw, 38px);
+      font-size: clamp(24px, 2.6vw, 36px);
       letter-spacing: -0.06em;
       line-height: 1.02;
       max-width: 14ch;
@@ -464,7 +438,7 @@
       font-size: 13px;
       line-height: 1.8;
       color: rgba(17,17,17,0.70);
-      max-width: 48ch;
+      max-width: 50ch;
     }
 
     .mini-grid {
@@ -473,21 +447,12 @@
       gap: 12px;
     }
 
-    .mini-card {
-      padding: 14px;
-    }
+    .mini-card { padding: 14px; }
 
     .mini-card h4 {
       margin: 0 0 8px;
       font-size: 14px;
       letter-spacing: -0.03em;
-    }
-
-    .mini-card p {
-      margin: 0;
-      font-size: 12px;
-      line-height: 1.7;
-      color: rgba(17,17,17,0.66);
     }
 
     .fade-up {
@@ -500,35 +465,16 @@
     .delay-4 { animation-delay: .32s; }
 
     @keyframes rise {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 1180px) {
       html, body { overflow: auto; }
-      .stage {
-        height: auto;
-        min-height: calc(100vh - 28px);
-      }
-      .layout,
-      .cta-box,
-      .feature-grid,
-      .arch-flow {
-        grid-template-columns: 1fr;
-      }
-      .left,
-      .right {
-        grid-template-rows: auto;
-      }
-      .arch-step .arch-arrow {
-        display: none;
-      }
+      .stage { height: auto; min-height: calc(100vh - 28px); }
+      .layout, .cta-box, .feature-grid, .arch-flow { grid-template-columns: 1fr; }
+      .left, .right { grid-template-rows: auto; }
+      .arch-step .arch-arrow { display: none; }
     }
   </style>
 </head>
@@ -543,53 +489,53 @@
         <div class="logo"></div>
         <div>
           <h1>clight framework</h1>
-          <p>single-screen embedded visual landing page</p>
+          <p>统一 API、分层实现、面向多平台的嵌入式框架</p>
         </div>
       </div>
       <div class="chips">
-        <div class="chip">Blue + White</div>
-        <div class="chip">Black Type</div>
-        <div class="chip">3D Depth</div>
+        <div class="chip">HPM</div>
+        <div class="chip">STM32</div>
+        <div class="chip">ESP32</div>
       </div>
     </header>
 
     <section class="layout">
       <div class="left">
         <section class="hero-box fade-up delay-1 tilt">
-          <div class="eyebrow"><span class="dot"></span> 嵌入式框架 / 科技蓝白 / 单屏展示</div>
-          <h2 class="hero-title">看起来很远，<br>但结构非常清晰。</h2>
+          <div class="eyebrow"><span class="dot"></span> Framework Overview</div>
+          <h2 class="hero-title">把底层差异收起来，给业务层统一接口。</h2>
           <p class="hero-text">
-            这个首页把嵌入式框架的分层逻辑做成了一个单屏可读的视觉界面：蓝白色的未来感、黑色文字的清晰度、
-            立体阴影带来的 3D 厚度，都服务于“统一 API、分层实现、平台复用”这件事本身。
+            clight framework 不是单纯的驱动集合，而是一套用于整理 BSP、统一 API、隔离平台差异的中间层框架。
+            它的目标是让业务代码尽量先面对稳定接口，而不是直接耦合具体芯片平台的 HAL、SDK 或 IDF。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#">Embedded Ready</a>
-            <a class="button secondary" href="#">Visual System</a>
+            <span class="button primary">统一公共 API</span>
+            <span class="button secondary">多平台适配</span>
           </div>
         </section>
 
         <section class="feature-box fade-up delay-2">
-          <div class="section-title">核心板块</div>
+          <div class="section-title">这个框架在做什么</div>
           <div class="feature-grid">
             <article class="feature-card tilt">
               <div>
                 <span class="tag">API</span>
                 <h3>统一调用</h3>
-                <p>业务层优先面对稳定 API，而不是直接耦合某个平台的 HAL 或 SDK。</p>
+                <p>把 Gpio、Uart、Timer、Spi、I2c 等常用外设能力整理成业务代码更容易使用的公共 API。</p>
               </div>
             </article>
             <article class="feature-card tilt">
               <div>
                 <span class="tag">Port</span>
-                <h3>平台适配</h3>
-                <p>把 HPM / STM32 / ESP32 差异收口到实现层，而不是把差异扩散到业务代码里。</p>
+                <h3>平台隔离</h3>
+                <p>把 HPM、STM32、ESP32 的差异收口在 port 层，不让业务逻辑被底层实现细节污染。</p>
               </div>
             </article>
             <article class="feature-card tilt">
               <div>
-                <span class="tag">Manifest</span>
-                <h3>映射清单</h3>
-                <p>用生成结果索引把 profile、实例名和底层 BSP 宏的关系讲清楚。</p>
+                <span class="tag">Config</span>
+                <h3>生成映射</h3>
+                <p>用 profile 配置和生成器确定对外导出的模块、实例名，以及它们到 BSP 资源的映射关系。</p>
               </div>
             </article>
           </div>
@@ -603,7 +549,7 @@
             <article class="arch-step tilt">
               <strong>Layer 01</strong>
               <span>bsp/api</span>
-              <p>给业务代码直接使用的统一公共接口。</p>
+              <p>业务代码直接使用的统一公共接口。</p>
               <div class="arch-arrow">→</div>
             </article>
             <article class="arch-step tilt">
@@ -628,29 +574,30 @@
 
         <section class="cta-box fade-up delay-4">
           <div class="cta-main">
-            <div class="section-title">视觉方向</div>
-            <h2>蓝色、白色、黑字，卡片之间要有明显的空间和重量。</h2>
+            <div class="section-title">快速理解</div>
+            <h2>它本质上是在做一层可复用、可映射、可扩展的 BSP 抽象。</h2>
             <p>
-              这次不是做成长滚动页面，而是把信息压缩在一个屏幕里。每个板块清楚分区，字号收小，
-              同时加入真实的 hover 倾斜感和轻量入场动画，让界面更像“嵌入式框架官网首屏”。
+              如果你第一次接触这套框架，可以先只记住三件事：
+              业务代码优先用 `bsp/api`，底层接口在 `bsp/interface`，真实平台实现放在 `bsp/port`。
+              其余像 `config/clight`、`manifest`、生成器，都是在支撑这条主链路。
             </p>
           </div>
           <div class="mini-grid">
             <article class="mini-card tilt">
-              <h4>3D Hover</h4>
-              <p>卡片 hover 时会倾斜并增强阴影，形成真正的立体感。</p>
+              <h4>目录主线</h4>
+              <p>`bsp/api`、`bsp/interface`、`bsp/port`、`modules` 是最先该理解的几层。</p>
             </article>
             <article class="mini-card tilt">
-              <h4>Single Screen</h4>
-              <p>内容压缩到首屏，不再依赖长滚动叙事。</p>
+              <h4>配置来源</h4>
+              <p>`config/clight` 决定对外暴露哪些模块和实例名，不是写死在业务代码里。</p>
             </article>
             <article class="mini-card tilt">
-              <h4>Structured Blocks</h4>
-              <p>Hero、特性、架构图、视觉说明四个板块清晰分开。</p>
+              <h4>结果索引</h4>
+              <p>`manifest` 用来查看 profile 导出结果和实例映射关系，帮助排查与理解。</p>
             </article>
             <article class="mini-card tilt">
-              <h4>Embedded Tone</h4>
-              <p>整体更像技术系统首页，而不是泛化的概念海报。</p>
+              <h4>适合谁</h4>
+              <p>适合想统一多平台接口、降低业务层耦合、让新人更容易接手的人。</p>
             </article>
           </div>
         </section>
